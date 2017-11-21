@@ -3222,8 +3222,11 @@ function createPage(casper) {
 
         if (page.isPopup) {
             casper.emit('popup.created', page);
+            
+            page.customHeaders = casper.options.pageSettings.customHeaders;
+
             if (casper.options.pageSettings.userAgent !== defaultUserAgent) {
-                page.customHeaders = {"User-Agent": casper.options.pageSettings.userAgent};
+                page.customHeaders["User-Agent"] = casper.options.pageSettings.userAgent;
             }
             page.settings = utils.mergeObjects(page.settings, casper.options.pageSettings);
             if (utils.isClipRect(casper.options.clipRect)) {
